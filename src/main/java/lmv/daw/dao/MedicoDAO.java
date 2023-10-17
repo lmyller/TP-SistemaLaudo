@@ -9,7 +9,6 @@ import java.util.List;
 
 import lmv.daw.bd.Conexao;
 import lmv.daw.modelo.Medico;
-import lmv.daw.modelo.MedicoResidente;
 
 public class MedicoDAO implements DAO<Medico> {
 
@@ -21,12 +20,13 @@ private Connection connection;
 	
 	@Override
 	public void adiciona(Medico medico) throws SQLException {
-		String sql = "insert into medico (crm, nome)" +
-				 "values (?, ?)";
+		String sql = "insert into medico (crm, nome, titular_hospital)" +
+				 "values (?, ?, ?)";
 	
 		try (PreparedStatement statement = connection.prepareStatement(sql)){
 			statement.setString(1, medico.getCrm());
 			statement.setString(2, medico.getNome());
+			statement.setBoolean(3, medico.isTitularHospital());
 			statement.execute();
 		}
 	}
@@ -51,6 +51,11 @@ private Connection connection;
 			statement.execute();
 		}
 	}
+	
+	@Override
+	public int quantidade(String status) throws SQLException {
+		return 0;
+	}
 
 	@Override
 	public Medico recupera(Medico medico) throws SQLException {
@@ -62,7 +67,7 @@ private Connection connection;
 			ResultSet rs = stmt.executeQuery();
 			
 			while(rs.next()) {
-				medicoEncontrado = new MedicoResidente();
+				medicoEncontrado = new Medico();
 				medicoEncontrado.setCrm(rs.getString("crm"));
 				medicoEncontrado.setNome(rs.getString("nome"));
 			}
@@ -79,7 +84,25 @@ private Connection connection;
 			ResultSet rs = stmt.executeQuery();
 			
 			while(rs.next()) {
-				Medico medico = new MedicoResidente();
+				Medico medico = new Medico();
+				medico.setCrm(rs.getString("crm"));
+				medico.setNome(rs.getString("nome"));
+				medicos.add(medico);
+			}
+		}
+		return medicos;
+	}
+	
+	public List<Medico> listaMedicosHospital() throws SQLException {
+		List<Medico> medicos = new ArrayList<>();
+		String sql = "select * from medico where titular_hospital=?";
+		
+		try (PreparedStatement stmt = connection.prepareStatement(sql)){
+			stmt.setBoolean(1, true);
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				Medico medico = new Medico();
 				medico.setCrm(rs.getString("crm"));
 				medico.setNome(rs.getString("nome"));
 				medicos.add(medico);

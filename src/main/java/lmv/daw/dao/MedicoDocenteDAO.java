@@ -52,6 +52,11 @@ public class MedicoDocenteDAO implements DAO<MedicoDocente>{
 			statement.execute();
 		}
 	}
+	
+	@Override
+	public int quantidade(String status) throws SQLException {
+		return 0;
+	}
 
 	@Override
 	public MedicoDocente recupera(MedicoDocente medico) throws SQLException {

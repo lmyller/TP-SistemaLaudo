@@ -1,5 +1,9 @@
 package lmv.daw.modelo;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import lmv.daw.enums.StatusExame;
 import lmv.daw.enums.TipoExame;
 
 public class Exame {
@@ -7,6 +11,10 @@ public class Exame {
 	private TipoExame tipoExame;
 	private Medico medico;
 	private Paciente paciente;
+	private String recomendacao;
+	private StatusExame statusExame;
+	private LocalDate data;
+	private LocalTime hora;
 	
 	public Long getId() {
 		return id;
@@ -38,5 +46,37 @@ public class Exame {
 	
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
+	}
+
+	public String getRecomendacao() {
+		return recomendacao;
+	}
+
+	public void setRecomendacao(String recomendacao) {
+		this.recomendacao = recomendacao;
+	}
+
+	public StatusExame getStatusExame() {
+		return statusExame;
+	}
+
+	public void setStatusExame(StatusExame statusExame) {
+		this.statusExame = statusExame;
+	}
+
+	public LocalDate getData() {
+		return data;
+	}
+
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
+
+	public LocalTime getHora() {
+		return hora;
+	}
+
+	public void setHora(LocalTime hora) {
+		this.hora = hora;
 	}
 }

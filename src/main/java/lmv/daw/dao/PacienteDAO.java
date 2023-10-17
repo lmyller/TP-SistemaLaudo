@@ -60,6 +60,11 @@ public class PacienteDAO implements DAO<Paciente> {
 			statement.execute();
 		}
 	}
+	
+	@Override
+	public int quantidade(String status) throws SQLException {
+		return 0;
+	}
 
 	@Override
 	public Paciente recupera(Paciente paciente) throws SQLException {
@@ -75,7 +80,7 @@ public class PacienteDAO implements DAO<Paciente> {
 				pacienteEncontrado.setCpf(rs.getString("cpf"));
 				pacienteEncontrado.setNome(rs.getString("nome"));
 				pacienteEncontrado.setEmail(rs.getString("email"));
-				pacienteEncontrado.setSexo(rs.getString("endereco").charAt(0));
+				pacienteEncontrado.setSexo(rs.getString("sexo").charAt(0));
 				pacienteEncontrado.setIdade(rs.getShort("idade"));
 				pacienteEncontrado.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 			}
@@ -95,7 +100,7 @@ public class PacienteDAO implements DAO<Paciente> {
 				paciente.setCpf(rs.getString("cpf"));
 				paciente.setNome(rs.getString("nome"));
 				paciente.setEmail(rs.getString("email"));
-				paciente.setSexo(rs.getString("endereco").charAt(0));
+				paciente.setSexo(rs.getString("sexo").charAt(0));
 				paciente.setIdade(rs.getShort("idade"));
 				paciente.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 				pacientes.add(paciente);

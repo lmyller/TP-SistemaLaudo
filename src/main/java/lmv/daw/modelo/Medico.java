@@ -1,7 +1,8 @@
 package lmv.daw.modelo;
 
-public abstract class Medico {
+public class Medico {
 	private String nome, crm;
+	private boolean titularHospital;
 	
 	public String getNome() {
 		return nome;
@@ -17,5 +18,13 @@ public abstract class Medico {
 
 	public void setCrm(String crm) {
 		this.crm = crm;
+	}
+
+	public boolean isTitularHospital() {
+		return titularHospital;
+	}
+
+	public void setTitularHospital(boolean titularHospital) {
+		this.titularHospital = titularHospital;
 	}
 }

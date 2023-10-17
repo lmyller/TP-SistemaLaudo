@@ -53,6 +53,11 @@ private Connection connection;
 			statement.execute();
 		}
 	}
+	
+	@Override
+	public int quantidade(String status) throws SQLException {
+		return 0;
+	}
 
 	@Override
 	public MedicoResidente recupera(MedicoResidente medico) throws SQLException {
